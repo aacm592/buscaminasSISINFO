@@ -129,7 +129,7 @@ public class Tablero extends JPanel {
         if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
             Casilla c = casillas[fila][columna];
             if (!c.getDescubierta()) {
-                c.colocarQuitarBandera();
+                c.alternarBandera();
             }
         }
     }

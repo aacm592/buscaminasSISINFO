@@ -13,7 +13,7 @@ public class Casilla extends JButton {
         this.descubierta = false;
         this.minasAlrededor = 0;
         this.bandera = false;
-        setText("");
+        actualizarDisplay();
     }
 
     public boolean getTieneMina() {
@@ -33,8 +33,7 @@ public class Casilla extends JButton {
         if (!puedeDescubrir()) return;
 
         this.descubierta = true;
-        actualizarHabilitado();
-        actualizarTextoAlDescubrir();
+        actualizarDisplay();
     }
 
     /** Extract Method: determina si una casilla puede ser descubierta */
@@ -72,17 +71,22 @@ public class Casilla extends JButton {
         return bandera;
     }
 
-    public void alternarBandera() {
-        if(!descubierta) {
-            this.bandera = !this.bandera;
+    /** Extract Method principal: define el estado visual de la casilla */
+    private void actualizarDisplay() {
+        if (descubierta) {
+            actualizarHabilitado();
+            actualizarTextoAlDescubrir();
+        } else {
             setText(bandera ? "🚩" : "");
+            actualizarHabilitado();
         }
     }
-    
-    public void colocarQuitarBandera() {
-        if(descubierta) return;
-        bandera = !bandera;
-        setText(bandera ? "🚩" : "");
+    /** Alterna una bandera */
+    public void alternarBandera() {
+        if (descubierta) return;
+        this.bandera = !this.bandera;
+        actualizarDisplay();
     }
-    
+
+
 }

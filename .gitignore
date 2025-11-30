@@ -1,0 +1,16 @@
+# IDE
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Compiled class files
+*.class
+
+# Build output
+target/
+build/
+
+# Other
+.DS_Store
+*.log

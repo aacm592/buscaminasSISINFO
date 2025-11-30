@@ -60,6 +60,10 @@ public class MainWindow extends JFrame {
             menuDificultad.show(botonDificultad, 0, botonDificultad.getHeight());
         });
         
+        botonReiniciar.addActionListener(e -> {
+            cambiarTablero(tablero.getFilas(), tablero.getColumnas(), tablero.getCantminas());
+        });
+
         setVisible(true);
     }
 

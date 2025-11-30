@@ -56,6 +56,7 @@ public class Tablero extends JPanel {
 
                             if (juegoIniciado) {
                                 descubrirCasilla(fila, columna);
+                                verificarVictoria();
                             }
 
                         } else if (SwingUtilities.isRightMouseButton(e)) {
@@ -158,6 +159,23 @@ public class Tablero extends JPanel {
                 }
             }
         }
+    }
+
+    private void verificarVictoria() {
+        if (!juegoIniciado) return;
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                Casilla c = casillas[i][j];
+                if (!c.getTieneMina() && !c.getDescubierta()) {
+                    return; // Aún hay casillas sin mina por descubrir
+                }
+            }
+        }
+
+        // Todas las casillas sin mina han sido descubiertas
+        juegoIniciado = false;
+        JOptionPane.showMessageDialog(this, "¡Has ganado!", "Victoria", JOptionPane.INFORMATION_MESSAGE);
     }
 
       public Casilla getCasilla(int fila, int columna) {

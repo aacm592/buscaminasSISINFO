@@ -28,20 +28,36 @@ public class Casilla extends JButton {
         return descubierta;
     }
 
+    /** Descubre la casilla si es válido hacerlo */
     public void descubrir() {
-        if(descubierta || bandera) return;
+        if (!puedeDescubrir()) return;
 
         this.descubierta = true;
-        setEnabled(false);
+        actualizarHabilitado();
+        actualizarTextoAlDescubrir();
+    }
 
-        if(tieneMina) {
+    /** Extract Method: determina si una casilla puede ser descubierta */
+    private boolean puedeDescubrir() {
+        return !descubierta && !bandera;
+    }
+    /** Extract Method: actualiza si el botón debe estar habilitado */
+    private void actualizarHabilitado() {
+        setEnabled(!descubierta && !bandera);
+    }
+    /** Replace Temp With Query: eliminamos un "if (minasAlrededor > 0)" duplicado */
+    private boolean tieneMinasAlrededor() {
+        return minasAlrededor > 0;
+    }
+    /** Extract Method + Replace Temp With Query */
+    private void actualizarTextoAlDescubrir() {
+        if (getTieneMina()) {
             setText("💣");
-        } else if (minasAlrededor > 0) {
+        } else if (tieneMinasAlrededor()) {
             setText(String.valueOf(minasAlrededor));
         } else {
             setText("");
         }
-        // Se eliminó el setEnabled(false) duplicado
     }
 
     public int getMinasAlrededor() {
